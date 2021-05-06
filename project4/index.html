@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Input</title>
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&display=swap" rel="stylesheet">
+  <script type="text/babel">
+    const compsButton = React.createElement(() => {
+      const { useState } = window.React;
+
+      const [text, setText] = useState('');
+
+
+      return (
+        <div className={'wrap'}>
+          <div className={'fr'}>
+            <div className={'left'}>
+              <h1>WHAT SHOULD I EAT FOR TODAY?</h1>
+              <h3>write some random letters:</h3>
+              <input value={text} onChange={event => {
+                const value = event.target.value
+                let text = value.split('').filter(i => i >= 'A' && i <= 'z').join('')
+                if (text.length > 4){
+                  text = text.substr(0, 4)
+                }
+                setText(text)
+              }}/>
+              <h3>……</h3>
+            </div>
+            <div className={'content'}>
+              {text.split('').map(i=> <img src={`./img/${i.toLowerCase()}.png`}/>)}
+            </div>
+          </div>
+
+        </div>
+      )
+    });
+
+    ReactDOM.render(compsButton, document.getElementById("example"));
+
+  </script>
+</head>
+<body>
+<div id="example"></div>
+</body>
+</html>
